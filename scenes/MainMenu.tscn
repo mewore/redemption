@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/fonts/title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/MainMenu.cs" type="Script" id=3]
+
+[node name="MainMenu" type="HBoxContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="LeftMargin" type="Control" parent="."]
+margin_right = 50.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+margin_left = 54.0
+margin_right = 554.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 500, 0 )
+
+[node name="UpperMargin" type="Control" parent="MenuContainer"]
+margin_right = 500.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 0, 250 )
+
+[node name="Title" type="Label" parent="MenuContainer"]
+margin_top = 254.0
+margin_right = 500.0
+margin_bottom = 340.0
+custom_fonts/font = ExtResource( 2 )
+text = "<Title>"
+
+[node name="MarginBelowTitle" type="Control" parent="MenuContainer"]
+margin_top = 344.0
+margin_right = 500.0
+margin_bottom = 394.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="StartButton" type="Button" parent="MenuContainer"]
+margin_top = 398.0
+margin_right = 500.0
+margin_bottom = 459.0
+disabled = true
+text = "Start"
