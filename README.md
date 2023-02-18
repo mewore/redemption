@@ -12,7 +12,7 @@
 ### MVP
 
 - [x] 💙 Main menu
-- [ ] 💙 Simple environment
+- [x] 💙 Simple environment
 - [ ] 💙 Player
 - [ ] 💙 Player flight
 - [ ] 💙 Sticks the player can collect
