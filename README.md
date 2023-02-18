@@ -15,16 +15,19 @@
 - [x] 💙 Simple environment
 - [x] 💙 Player
 - [x] 💙 Player flight
-- [ ] 💙 Sticks the player can collect
-- [ ] 💙 A place the player needs to place the sticks at
-- [ ] 💙 When all the sticks have been placed, the level is unlocked and the player can exit, completing the level
+- [x] 💙 Twigs
+- [ ] 💙 The player can collect the twigs
+- [ ] 💙 A place the player needs to place the twigs at
+- [ ] 💙 When all the twigs have been placed, the level is unlocked and the player can exit, completing the level
 - [ ] 💚 1 level
 - [ ] 💟 Publish `0.1.0`
 
 ### Basic features
 
+- [ ] 💙 Twig groups - multiple twigs at the same place appear as one with a number above
 - [ ] 💜 Player sprite
 - [ ] 💙 Timer
+- [ ] 💙 Counters for twigs, carry limit, etc.
 - [ ] 💙💜 Bird companions
 - [ ] 💙 The bird companions disappear after some time
 - [ ] 💜 The place where the player needs to put the sticks
