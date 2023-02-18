@@ -1,7 +1,7 @@
 public partial class PlayerState : State
 {
     protected const string ACTIVE = "Active";
-    protected const string WINNING = "Winning";
+    protected const string FLYING = "Flying";
 
     protected Player player;
 

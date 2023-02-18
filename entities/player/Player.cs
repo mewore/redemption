@@ -3,6 +3,12 @@ using System;
 
 public partial class Player : KinematicBody2D
 {
+    [Signal]
+    delegate void FlyRequested();
+
+    [Signal]
+    delegate void LandRequested();
+
     // Movement
     [Export]
     private float acceleration = 4000.0f;
@@ -16,11 +22,22 @@ public partial class Player : KinematicBody2D
     [Export(PropertyHint.Range, "0,1")]
     private float jumpSpeedRetention = .5f;
 
+    private float jumpFlyY;
+
     [Export]
     private float jumpGraceTime = .1f;
     private double now = .0;
     private float lastWantedToJumpAt = -Mathf.Inf;
     private float lastAbleToJumpAt = -Mathf.Inf;
+
+    // Flying
+
+    [Export]
+    private float flyAcceleration = 2000.0f;
+
+    [Export]
+    private float flyMaxSpeed = 600.0f;
+
 
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     public float gravity = (int)ProjectSettings.GetSetting("physics/2d/default_gravity");
@@ -33,7 +50,7 @@ public partial class Player : KinematicBody2D
     public override void _Ready()
     {
         sprite = GetNode<Sprite>("Sprite");
-        jumpSpeed = Mathf.Sqrt(gravity * (-GetNode<Node2D>("JumpHeight").Position.y) * GlobalScale.y);
+        jumpSpeed = Mathf.Sqrt(gravity * -GetNode<Node2D>("JumpHeight").Position.y * GlobalScale.y);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -53,22 +70,34 @@ public partial class Player : KinematicBody2D
         {
             velocity.y *= jumpSpeedRetention;
         }
-        if (Input.IsActionJustPressed("jump"))
-        {
-            lastWantedToJumpAt = (float)now;
-        }
+
         if (IsOnFloor())
         {
             lastAbleToJumpAt = (float)now;
+            jumpFlyY = -Mathf.Inf;
         }
         else
         {
             velocity.y += gravity * (float)delta;
         }
+
+        if (Input.IsActionJustPressed("jump"))
+        {
+            if (GlobalPosition.y < jumpFlyY || velocity.y < 0f)
+            {
+                InitiateFlight();
+            }
+            else
+            {
+                lastWantedToJumpAt = (float)now;
+            }
+        }
+
         if (canControl && Mathf.Min(lastWantedToJumpAt, lastAbleToJumpAt) + jumpGraceTime > (float)now)
         {
             velocity.y = -jumpSpeed;
             lastWantedToJumpAt = -Mathf.Inf;
+            jumpFlyY = GlobalPosition.y + GetNode<Node2D>("JumpHeight").Position.y * GlobalScale.y * .2f;
         }
 
         float desiredVelocityX = canControl ? Input.GetAxis("move_left", "move_right") * maxSpeed : 0f;
@@ -81,5 +110,37 @@ public partial class Player : KinematicBody2D
         }
 
         velocity = MoveAndSlide(velocity, Vector2.Up);
+    }
+
+    public void InitiateFlight()
+    {
+        jumpFlyY = -Mathf.Inf;
+        velocity.y = -jumpSpeed;
+        EmitSignal(nameof(FlyRequested));
+        lastWantedToJumpAt = -jumpGraceTime;
+    }
+
+    public void Fly(float delta)
+    {
+        if (!CanMove)
+        {
+            return;
+        }
+
+        Vector2 desiredVelocity = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("fly_up", "fly_down")).Normalized() * flyMaxSpeed;
+        velocity = velocity.MoveToward(desiredVelocity, flyAcceleration * (float)delta);
+
+        int lookSign = Mathf.Sign(desiredVelocity.x);
+        if (lookSign != 0 && lookSign != Mathf.Sign(sprite.Scale.x))
+        {
+            sprite.Scale = new Vector2(-sprite.Scale.x, sprite.Scale.y);
+        }
+
+        velocity = MoveAndSlide(velocity, Vector2.Up);
+
+        if (IsOnFloor() && Input.IsActionPressed("fly_down"))
+        {
+            EmitSignal(nameof(LandRequested));
+        }
     }
 }

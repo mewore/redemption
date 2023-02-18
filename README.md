@@ -14,7 +14,7 @@
 - [x] 💙 Main menu
 - [x] 💙 Simple environment
 - [x] 💙 Player
-- [ ] 💙 Player flight
+- [x] 💙 Player flight
 - [ ] 💙 Sticks the player can collect
 - [ ] 💙 A place the player needs to place the sticks at
 - [ ] 💙 When all the sticks have been placed, the level is unlocked and the player can exit, completing the level
