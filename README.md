@@ -13,7 +13,7 @@
 
 - [x] 💙 Main menu
 - [x] 💙 Simple environment
-- [ ] 💙 Player
+- [x] 💙 Player
 - [ ] 💙 Player flight
 - [ ] 💙 Sticks the player can collect
 - [ ] 💙 A place the player needs to place the sticks at

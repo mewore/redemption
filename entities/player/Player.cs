@@ -5,14 +5,13 @@ public partial class Player : KinematicBody2D
 {
     // Movement
     [Export]
-    private float acceleration = 800.0f;
+    private float acceleration = 4000.0f;
 
     [Export]
-    private float maxSpeed = 150.0f;
+    private float maxSpeed = 400.0f;
 
     // Jumping
-    [Export]
-    private float jumpSpeed = 300.0f;
+    private float jumpSpeed;
 
     [Export(PropertyHint.Range, "0,1")]
     private float jumpSpeedRetention = .5f;
@@ -24,7 +23,7 @@ public partial class Player : KinematicBody2D
     private float lastAbleToJumpAt = -Mathf.Inf;
 
     // Get the gravity from the project settings to be synced with RigidBody nodes.
-    public float gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
+    public float gravity = (int)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
     private Sprite sprite;
 
@@ -34,10 +33,7 @@ public partial class Player : KinematicBody2D
     public override void _Ready()
     {
         sprite = GetNode<Sprite>("Sprite");
-        if (Position.x > (float)ProjectSettings.GetSetting("display/window/size/viewport_width") * .5f)
-        {
-            sprite.Scale = new Vector2(-sprite.Scale.x, sprite.Scale.y);
-        }
+        jumpSpeed = Mathf.Sqrt(gravity * (-GetNode<Node2D>("JumpHeight").Position.y) * GlobalScale.y);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -84,6 +80,6 @@ public partial class Player : KinematicBody2D
             sprite.Scale = new Vector2(-sprite.Scale.x, sprite.Scale.y);
         }
 
-        velocity = MoveAndSlide(velocity);
+        velocity = MoveAndSlide(velocity, Vector2.Up);
     }
 }
