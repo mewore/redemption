@@ -71,6 +71,8 @@ public partial class Player : KinematicBody2D
 
     private AnimationPlayer animationPlayer;
 
+    private int helpers = 0;
+
     public override void _Ready()
     {
         sprite = GetNode<Sprite>("Sprite");
@@ -100,7 +102,7 @@ public partial class Player : KinematicBody2D
         {
             return;
         }
-        maxTwigs = maxTwigsWhenWalking;
+        maxTwigs = maxTwigsWhenWalking + helpers;
 
         // Handle Jump.
         if (Input.IsActionJustReleased("jump") && velocity.y < 0f)
@@ -174,7 +176,7 @@ public partial class Player : KinematicBody2D
         {
             return;
         }
-        maxTwigs = maxTwigsWhenFlying;
+        maxTwigs = maxTwigsWhenFlying + helpers;
 
         Vector2 desiredVelocity = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("fly_up", "fly_down")).Normalized() * flyMaxSpeed;
         velocity = velocity.MoveToward(desiredVelocity, flyAcceleration * (float)delta);
@@ -191,6 +193,12 @@ public partial class Player : KinematicBody2D
         {
             EmitSignal(nameof(LandRequested));
         }
+    }
+
+    public void AddHelper()
+    {
+        helpers++;
+        maxTwigs++;
     }
 
     public bool PickTwigUp()

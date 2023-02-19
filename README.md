@@ -29,7 +29,7 @@
 - [ ] 💜 Player sprite (flying)
 - [x] 💙 Timer
 - [x] 💙 Counters for twigs, carry limit, etc.
-- [ ] 💙💜 Bird companions
+- [x] 💙💜 Bird companions
 - [ ] 💙 The bird companions disappear after some time
 - [ ] 💜 The place where the player needs to put the sticks
 - [ ] 💚 5 levels

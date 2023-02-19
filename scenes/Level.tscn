@@ -90,6 +90,8 @@ limit_right = 1920
 limit_bottom = 1080
 smoothing_enabled = true
 
+[node name="Helpers" type="Node2D" parent="Game"]
+
 [node name="TwigCountLabels" type="Node2D" parent="."]
 
 [node name="TwigContainerLabel" parent="." instance=ExtResource( 9 )]
