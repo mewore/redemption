@@ -92,6 +92,10 @@ smoothing_enabled = true
 
 [node name="Helpers" type="Node2D" parent="Game"]
 
+[node name="HelperDeathTimer" type="Timer" parent="Game"]
+wait_time = 10.0
+autostart = true
+
 [node name="TwigCountLabels" type="Node2D" parent="."]
 
 [node name="TwigContainerLabel" parent="." instance=ExtResource( 9 )]
@@ -124,3 +128,4 @@ theme = ExtResource( 7 )
 text = "0:42"
 
 [connection signal="AllTwigsCollected" from="Game/TwigContainer" to="." method="_on_TwigContainer_AllTwigsCollected"]
+[connection signal="timeout" from="Game/HelperDeathTimer" to="." method="_on_HelperDeathTimer_timeout"]

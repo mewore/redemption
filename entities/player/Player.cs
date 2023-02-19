@@ -201,6 +201,12 @@ public partial class Player : KinematicBody2D
         maxTwigs++;
     }
 
+    public void RemoveHelper()
+    {
+        helpers--;
+        maxTwigs--;
+    }
+
     public bool PickTwigUp()
     {
         if (currentTwigs >= maxTwigs)

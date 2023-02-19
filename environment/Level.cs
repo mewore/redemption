@@ -22,6 +22,8 @@ public class Level : Node2D
     private float now;
     private Label timeLabel;
 
+    private Godot.Collections.Array helpers;
+
     public override void _Ready()
     {
         map = GetNode<TileMap>("Game/TileMap");
@@ -46,6 +48,8 @@ public class Level : Node2D
         }
         twigCountLabelContainer = GetNode("TwigCountLabels");
         timeLabel = GetNode<Label>("Hud/TimeContainer/TimeLabel");
+
+        helpers = GetNode("Game/Helpers").GetChildren();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -106,6 +110,17 @@ public class Level : Node2D
         foreach (Vector2 cell in exitCells)
         {
             map.SetCell((int)cell.x, (int)cell.y, -1);
+        }
+    }
+
+    public void _on_HelperDeathTimer_timeout()
+    {
+        foreach (Helper helper in helpers)
+        {
+            if (helper != null && helper.Disappear())
+            {
+                break;
+            }
         }
     }
 }

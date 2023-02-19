@@ -30,7 +30,7 @@
 - [x] 💙 Timer
 - [x] 💙 Counters for twigs, carry limit, etc.
 - [x] 💙💜 Bird companions
-- [ ] 💙 The bird companions disappear after some time
+- [x] 💙 The bird companions disappear after some time
 - [ ] 💜 The place where the player needs to put the sticks
 - [ ] 💚 5 levels
 - [ ] 💛 Bird companion SFX

@@ -61,4 +61,15 @@ public class Helper : Node2D
         CanvasItem sprite = GetNode<CanvasItem>("Sprite");
         sprite.Modulate = new Color(sprite.Modulate, .5f);
     }
+
+    public bool Disappear()
+    {
+        if (!following)
+        {
+            return false;
+        }
+        player.RemoveHelper();
+        QueueFree();
+        return true;
+    }
 }
