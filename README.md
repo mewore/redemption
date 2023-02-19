@@ -25,7 +25,8 @@
 ### Basic features
 
 - [x] 💙 Twig groups - multiple twigs at the same place appear as one with a number above
-- [ ] 💜 Player sprite
+- [x] 💜 Player sprite (walking)
+- [ ] 💜 Player sprite (flying)
 - [ ] 💙 Timer
 - [ ] 💙 Counters for twigs, carry limit, etc.
 - [ ] 💙💜 Bird companions

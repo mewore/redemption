@@ -67,6 +67,8 @@ public partial class Player : KinematicBody2D
     Node2D twigContainer;
     float detectionRangeSquared;
 
+    private AnimationPlayer animationPlayer;
+
     public override void _Ready()
     {
         sprite = GetNode<Sprite>("Sprite");
@@ -81,6 +83,8 @@ public partial class Player : KinematicBody2D
 
         twigContainerRayCast = GetNode<RayCast2D>("TwigContainerRayCast");
         detectionRangeSquared = (twigContainerRayCast.CastTo * GlobalScale).LengthSquared();
+
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -132,6 +136,17 @@ public partial class Player : KinematicBody2D
         }
 
         float desiredVelocityX = canControl ? Input.GetAxis("move_left", "move_right") * maxSpeed : 0f;
+        if (Mathf.Abs(desiredVelocityX) > .01f)
+        {
+            if (animationPlayer.CurrentAnimation != "walking")
+            {
+                animationPlayer.Play("walking");
+            }
+        }
+        else if (animationPlayer.CurrentAnimation != "standing")
+        {
+            animationPlayer.Play("standing");
+        }
         velocity.x = Mathf.MoveToward(velocity.x, desiredVelocityX, acceleration * (float)delta);
 
         int lookSign = Mathf.Sign(desiredVelocityX);

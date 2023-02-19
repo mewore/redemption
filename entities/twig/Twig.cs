@@ -24,6 +24,9 @@ public class Twig : Node2D
     private int positionId = 0;
     public int PositionId => positionId;
 
+    private Sprite sprite;
+    private float now = 0f;
+
     public override void _Ready()
     {
         var mapNodes = GetTree().GetNodesInGroup("map");
@@ -48,10 +51,13 @@ public class Twig : Node2D
         {
             twigContainer = twigContainerNodes[0] as TwigContainer;
         }
+
+        sprite = GetNode<Sprite>("Sprite");
     }
 
     public override void _PhysicsProcess(float delta)
     {
+        now += delta;
         if (delivered || player == null)
         {
             return;
@@ -70,6 +76,7 @@ public class Twig : Node2D
             GlobalPosition += distance * followSpeed;
             return;
         }
+        sprite.Frame = Mathf.RoundToInt(now % 1f);
 
         if (!player.CanCarryMoreTwigs || distance.LengthSquared() > detectionRangeSquared)
         {
@@ -81,7 +88,10 @@ public class Twig : Node2D
         {
             return;
         }
-        following = player.PickTwigUp();
+        if (following = player.PickTwigUp())
+        {
+            sprite.Frame = 0;
+        }
     }
 
     public void _on_Player_DroppedAllTwigs()
@@ -100,8 +110,7 @@ public class Twig : Node2D
         following = false;
         delivered = true;
         twigContainer.ReserveSpot(this);
-        GetNode<AnimationPlayer>("AnimationPlayer").Stop();
-        GetNode<Sprite>("Sprite").Frame = 0;
+        sprite.Frame = 0;
     }
 
     private void SnapToMap(Vector2 targetPosition)
