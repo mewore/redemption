@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[node name="Twig" type="Node2D"]
+[node name="Twig" type="Node2D" groups=["twig"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

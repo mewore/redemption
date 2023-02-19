@@ -15,7 +15,11 @@ public partial class PlayerActive : PlayerState
         flyRequestTimer.Stop();
     }
 
-    public override void PhysicsProcess(float delta) => player.Move(delta);
+    public override void PhysicsProcess(float delta)
+    {
+        player.Move(delta);
+        player.DetectTwigContainer();
+    }
 
     public void _on_Player_FlyRequested()
     {

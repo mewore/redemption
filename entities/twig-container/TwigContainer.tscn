@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/twig-container/TwigContainer.cs" type="Script" id=1]
+[ext_resource path="res://entities/twig-container/TwigSpot.tscn" type="PackedScene" id=2]
+
+[node name="TwigContainer" type="Node2D" groups=["twig_container"]]
+script = ExtResource( 1 )
+twigSpotScene = ExtResource( 2 )
+
+[node name="SpotRange" type="Position2D" parent="."]
+position = Vector2( 16, 0 )

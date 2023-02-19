@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://environment/tilesheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/twig-container/TwigContainer.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
@@ -43,5 +44,8 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 
 [node name="Player" parent="Game" instance=ExtResource( 2 )]
 position = Vector2( 69.3333, 128 )
+
+[node name="TwigContainer" parent="Game" instance=ExtResource( 4 )]
+position = Vector2( 149.333, 53.3333 )
 
 [node name="Twigs" type="Node2D" parent="Game"]

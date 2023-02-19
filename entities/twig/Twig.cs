@@ -9,9 +9,12 @@ public class Twig : Node2D
     float detectionRangeSquared;
 
     bool following = false;
+    bool delivered = false;
 
     [Export]
     private float followSpeed = .5f;
+
+    TwigContainer twigContainer;
 
     public override void _Ready()
     {
@@ -20,15 +23,21 @@ public class Twig : Node2D
         {
             player = playerNodes[0] as Player;
             player.Connect("DroppedAllTwigs", this, nameof(_on_Player_DroppedAllTwigs));
+            player.Connect("ReachedTwigContainer", this, nameof(_on_Player_ReachedTwigContainer));
         }
         rayCast2D = GetNode<RayCast2D>("RayCast2D");
-        Vector2 adjustedCastTo = rayCast2D.CastTo * GlobalScale;
-        detectionRangeSquared = adjustedCastTo.LengthSquared();
+        detectionRangeSquared = (rayCast2D.CastTo * GlobalScale).LengthSquared();
+
+        var twigContainerNodes = GetTree().GetNodesInGroup("twig_container");
+        if (twigContainerNodes.Count > 0)
+        {
+            twigContainer = twigContainerNodes[0] as TwigContainer;
+        }
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        if (player == null)
+        if (delivered || player == null)
         {
             return;
         }
@@ -56,5 +65,19 @@ public class Twig : Node2D
     public void _on_Player_DroppedAllTwigs()
     {
         following = false;
+    }
+
+    public void _on_Player_ReachedTwigContainer()
+    {
+        if (!following)
+        {
+            return;
+        }
+
+        following = false;
+        delivered = true;
+        twigContainer.ReserveSpot(this);
+        GetNode<AnimationPlayer>("AnimationPlayer").Stop();
+        GetNode<Sprite>("Sprite").Frame = 0;
     }
 }

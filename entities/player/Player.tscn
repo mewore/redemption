@@ -38,5 +38,8 @@ script = ExtResource( 5 )
 [node name="JumpHeight" type="Position2D" parent="."]
 position = Vector2( 0, -40 )
 
+[node name="TwigContainerRayCast" type="RayCast2D" parent="."]
+cast_to = Vector2( 48, 0 )
+
 [connection signal="FlyRequested" from="." to="States/Active" method="_on_Player_FlyRequested"]
 [connection signal="LandRequested" from="." to="States/Flying" method="_on_Player_LandRequested"]

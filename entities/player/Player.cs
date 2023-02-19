@@ -12,6 +12,9 @@ public partial class Player : KinematicBody2D
     [Signal]
     delegate void DroppedAllTwigs();
 
+    [Signal]
+    delegate void ReachedTwigContainer();
+
     // Movement
     [Export]
     private float acceleration = 4000.0f;
@@ -60,11 +63,24 @@ public partial class Player : KinematicBody2D
     private int currentTwigs;
     public bool CanCarryMoreTwigs { get => currentTwigs < maxTwigs; }
 
+    RayCast2D twigContainerRayCast;
+    Node2D twigContainer;
+    float detectionRangeSquared;
+
     public override void _Ready()
     {
         sprite = GetNode<Sprite>("Sprite");
         jumpSpeed = Mathf.Sqrt(gravity * -GetNode<Node2D>("JumpHeight").Position.y * GlobalScale.y);
         maxTwigs = maxTwigsWhenWalking;
+
+        var twigContainerNodes = GetTree().GetNodesInGroup("twig_container");
+        if (twigContainerNodes.Count > 0)
+        {
+            twigContainer = twigContainerNodes[0] as Node2D;
+        }
+
+        twigContainerRayCast = GetNode<RayCast2D>("TwigContainerRayCast");
+        detectionRangeSquared = (twigContainerRayCast.CastTo * GlobalScale).LengthSquared();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -178,5 +194,28 @@ public partial class Player : KinematicBody2D
         }
         ++currentTwigs;
         return true;
+    }
+
+    public void DetectTwigContainer()
+    {
+        if (twigContainer == null || currentTwigs == 0)
+        {
+            return;
+        }
+
+        Vector2 distance = twigContainer.GlobalPosition - GlobalPosition;
+
+        if (distance.LengthSquared() > detectionRangeSquared)
+        {
+            return;
+        }
+        twigContainerRayCast.CastTo = distance / GlobalScale;
+        twigContainerRayCast.ForceRaycastUpdate();
+        if (twigContainerRayCast.IsColliding())
+        {
+            return;
+        }
+        EmitSignal(nameof(ReachedTwigContainer));
+        currentTwigs = 0;
     }
 }
