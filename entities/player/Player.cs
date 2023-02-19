@@ -19,7 +19,7 @@ public partial class Player : KinematicBody2D
     private float acceleration = 4000.0f;
 
     [Export]
-    private float maxSpeed = 400.0f;
+    private float maxSpeed = 300.0f;
 
     // Jumping
     private float jumpSpeed;
@@ -38,11 +38,13 @@ public partial class Player : KinematicBody2D
     // Flying
 
     [Export]
-    private float flyAcceleration = 2000.0f;
+    private float flyAcceleration = 4000.0f;
 
     [Export]
-    private float flyMaxSpeed = 600.0f;
+    private float flyMaxSpeed = 800.0f;
 
+    [Export]
+    private float dashSpeed = 2000.0f;
 
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     public float gravity = (int)ProjectSettings.GetSetting("physics/2d/default_gravity");
@@ -193,6 +195,12 @@ public partial class Player : KinematicBody2D
         {
             EmitSignal(nameof(LandRequested));
         }
+    }
+
+    public void Dash()
+    {
+        GD.Print("Dash!");
+        velocity = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("fly_up", "fly_down")).Normalized() * dashSpeed;
     }
 
     public void AddHelper()

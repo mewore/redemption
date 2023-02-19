@@ -68,6 +68,9 @@ one_shot = true
 [node name="Flying" type="Node" parent="States"]
 script = ExtResource( 5 )
 
+[node name="DashCooldown" type="Timer" parent="States/Flying"]
+one_shot = true
+
 [node name="JumpHeight" type="Position2D" parent="."]
 position = Vector2( 0, -40 )
 

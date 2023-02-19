@@ -31,6 +31,11 @@
 - [x] 💙 Counters for twigs, carry limit, etc.
 - [x] 💙💜 Bird companions
 - [x] 💙 The bird companions disappear after some time
+- [x] 💙 Dashing while flying
+- [ ] 💙 The timer shouldn't start until the player has started moving
+- [ ] 💙 Pausing the game
+- [ ] 💙 Returning to the main menu
+- [ ] 💙 Restarting the level
 - [ ] 💜 The place where the player needs to put the sticks
 - [ ] 💚 5 levels
 - [ ] 💛 Bird companion SFX
@@ -46,10 +51,10 @@
   is defined by a Line2D)
 - [ ] 💜 Environment
 - [ ] 💜 Better-looking HUD
+- [ ] 💜 A better-looking indicator of the bird disappearance counter?
 - [ ] 💛 Menu SFX
 - [ ] 💙 Switching between levels
 - [ ] 💙 Show the best time per level
-- [ ] 💙 Dashing while flying
 - [ ] 💙💜 Obstacles that make the player drop all sticks
 - [ ] 💙💜 Obstacles that make bird companions disappear
 - [ ] 💛 Music
