@@ -16,7 +16,7 @@
 - [x] 💙 Player
 - [x] 💙 Player flight
 - [x] 💙 Twigs
-- [ ] 💙 The player can collect the twigs
+- [x] 💙 The player can collect the twigs
 - [ ] 💙 A place the player needs to place the twigs at
 - [ ] 💙 When all the twigs have been placed, the level is unlocked and the player can exit, completing the level
 - [ ] 💚 1 level

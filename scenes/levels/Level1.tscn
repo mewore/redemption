@@ -16,3 +16,21 @@ position = Vector2( 293.333, 38.6667 )
 
 [node name="Twig4" parent="Game/Twigs" index="3" instance=ExtResource( 2 )]
 position = Vector2( 293.333, 33.3333 )
+
+[node name="Twig5" parent="Game/Twigs" index="4" instance=ExtResource( 2 )]
+position = Vector2( 274.667, 44 )
+
+[node name="Twig6" parent="Game/Twigs" index="5" instance=ExtResource( 2 )]
+position = Vector2( 298.667, 164 )
+
+[node name="Twig7" parent="Game/Twigs" index="6" instance=ExtResource( 2 )]
+position = Vector2( 288, 164 )
+
+[node name="Twig8" parent="Game/Twigs" index="7" instance=ExtResource( 2 )]
+position = Vector2( 288, 170.667 )
+
+[node name="Twig9" parent="Game/Twigs" index="8" instance=ExtResource( 2 )]
+position = Vector2( 120, 165.333 )
+
+[node name="Twig10" parent="Game/Twigs" index="9" instance=ExtResource( 2 )]
+position = Vector2( 120, 172 )

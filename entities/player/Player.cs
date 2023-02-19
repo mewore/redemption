@@ -9,6 +9,9 @@ public partial class Player : KinematicBody2D
     [Signal]
     delegate void LandRequested();
 
+    [Signal]
+    delegate void DroppedAllTwigs();
+
     // Movement
     [Export]
     private float acceleration = 4000.0f;
@@ -47,10 +50,21 @@ public partial class Player : KinematicBody2D
     private Vector2 velocity;
     public bool CanMove = true;
 
+    [Export]
+    private int maxTwigsWhenWalking = 10;
+
+    [Export]
+    private int maxTwigsWhenFlying = 5;
+
+    private int maxTwigs;
+    private int currentTwigs;
+    public bool CanCarryMoreTwigs { get => currentTwigs < maxTwigs; }
+
     public override void _Ready()
     {
         sprite = GetNode<Sprite>("Sprite");
         jumpSpeed = Mathf.Sqrt(gravity * -GetNode<Node2D>("JumpHeight").Position.y * GlobalScale.y);
+        maxTwigs = maxTwigsWhenWalking;
     }
 
     public override void _PhysicsProcess(float delta)
@@ -64,6 +78,7 @@ public partial class Player : KinematicBody2D
         {
             return;
         }
+        SetTwigCapacity(maxTwigsWhenWalking);
 
         // Handle Jump.
         if (Input.IsActionJustReleased("jump") && velocity.y < 0f)
@@ -126,6 +141,7 @@ public partial class Player : KinematicBody2D
         {
             return;
         }
+        SetTwigCapacity(maxTwigsWhenFlying);
 
         Vector2 desiredVelocity = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("fly_up", "fly_down")).Normalized() * flyMaxSpeed;
         velocity = velocity.MoveToward(desiredVelocity, flyAcceleration * (float)delta);
@@ -142,5 +158,25 @@ public partial class Player : KinematicBody2D
         {
             EmitSignal(nameof(LandRequested));
         }
+    }
+
+    private void SetTwigCapacity(int newCapcity)
+    {
+        if (newCapcity < maxTwigs)
+        {
+            EmitSignal(nameof(DroppedAllTwigs));
+            currentTwigs = 0;
+        }
+        maxTwigs = newCapcity;
+    }
+
+    public bool PickTwigUp()
+    {
+        if (currentTwigs >= maxTwigs)
+        {
+            return false;
+        }
+        ++currentTwigs;
+        return true;
     }
 }
