@@ -82,7 +82,7 @@ IFS='' cat "${EXPORT_PRESETS_FILE}" | while read -r line; do
     current_preset_platform="${new_preset_platform}"
   elif echo -n "${line}" | grep -qP '^export_path="[^"]*"$'; then
     case "${current_preset_platform}" in
-      'Web')
+      'HTML5')
         line="export_path=\"${relative_version_dir}/${WEB_DIR}/index.html\""
         echo "        - Path: ${version_dir}/${WEB_DIR}/index.html"
         ;;
@@ -136,7 +136,6 @@ if [ "${is_test_web}" == 0 ]; then
   mkdir -p "${version_dir}/${WEB_DIR}"
   web_log="${version_dir}/export-web.log"
   godot --no-window --export "HTML5" > "${web_log}" &
-  echo "No web export in Godot 4 yet :c https://godotengine.org/qa/129054/godot-4-html5-webassembly-export" > "${version_dir}/${WEB_DIR}/meh.log" &
   web_pid=$!
 
   mkdir -p "${version_dir}/${WINDOWS_DIR}"
@@ -171,8 +170,6 @@ if [ "${is_test_web}" == 0 ]; then
   wait
   echo "Done"
 else
-  echo "No web export in Godot 4 yet :c https://godotengine.org/qa/129054/godot-4-html5-webassembly-export"
-  exit 1
   godot --no-window --export-debug "HTML5" | tee "${web_log}"
   make_zip "${version_dir}/${WEB_DIR}" "${version_dir}/${lowercase_export_name}-web.zip" &
 fi
