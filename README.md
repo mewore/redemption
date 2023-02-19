@@ -24,8 +24,6 @@
 
 ### Basic features
 
-- [ ] 💙 A spinning heartbeat line around the twig container, which shoots out towards the exit when done (and its path
-  is defined by a Line2D)
 - [ ] 💙 Twig groups - multiple twigs at the same place appear as one with a number above
 - [ ] 💜 Player sprite
 - [ ] 💙 Timer
@@ -43,6 +41,8 @@
 
 ### Advanced features
 
+- [ ] 💙 A spinning heartbeat line around the twig container, which shoots out towards the exit when done (and its path
+  is defined by a Line2D)
 - [ ] 💜 Environment
 - [ ] 💜 Better-looking HUD
 - [ ] 💛 Menu SFX
