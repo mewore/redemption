@@ -27,7 +27,7 @@
 - [x] 💙 Twig groups - multiple twigs at the same place appear as one with a number above
 - [x] 💜 Player sprite (walking)
 - [ ] 💜 Player sprite (flying)
-- [ ] 💙 Timer
+- [x] 💙 Timer
 - [ ] 💙 Counters for twigs, carry limit, etc.
 - [ ] 💙💜 Bird companions
 - [ ] 💙 The bird companions disappear after some time
@@ -48,6 +48,7 @@
 - [ ] 💜 Better-looking HUD
 - [ ] 💛 Menu SFX
 - [ ] 💙 Switching between levels
+- [ ] 💙 Show the best time per level
 - [ ] 💙💜 Obstacles that make the player drop all sticks
 - [ ] 💙💜 Obstacles that make bird companions disappear
 - [ ] 💛 Music

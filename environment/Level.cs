@@ -19,6 +19,9 @@ public class Level : Node2D
     private Dictionary<int, int> twigCount = new Dictionary<int, int>();
     private Dictionary<int, Vector2> twigPositions = new Dictionary<int, Vector2>();
 
+    private float now;
+    private Label timeLabel;
+
     public override void _Ready()
     {
         map = GetNode<TileMap>("Game/TileMap");
@@ -42,10 +45,14 @@ public class Level : Node2D
             twigs[index] = (Twig)twigNodes[index];
         }
         twigCountLabelContainer = GetNode("TwigCountLabels");
+        timeLabel = GetNode<Label>("Hud/TimeContainer/TimeLabel");
     }
 
     public override void _PhysicsProcess(float delta)
     {
+        now += delta;
+        int seconds = Mathf.FloorToInt(now);
+        timeLabel.Text = (seconds / 60).ToString() + ":" + ((seconds % 60) / 10).ToString() + ((seconds % 60) % 10).ToString();
         Vector2 playerPos = player.GlobalPosition;
         if (playerPos.x > camera.LimitRight || playerPos.x < camera.LimitLeft || playerPos.y > camera.LimitBottom || playerPos.y < camera.LimitTop)
         {
