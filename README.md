@@ -18,8 +18,8 @@
 - [x] 💙 Twigs
 - [x] 💙 The player can collect the twigs
 - [x] 💙 A place the player needs to place the twigs at - twig container
-- [ ] 💙 When all the twigs have been placed, the level is unlocked and the player can exit, completing the level
-- [ ] 💚 1 level
+- [x] 💙 When all the twigs have been placed, the level is unlocked and the player can exit, completing the level
+- [x] 💚 1 level
 - [ ] 💟 Publish `0.1.0`
 
 ### Basic features

@@ -2,8 +2,11 @@ using Godot;
 
 public class TwigContainer : Node2D
 {
+    [Signal]
+    delegate void AllTwigsCollected();
+
     [Export]
-    private PackedScene twigSpotScene;
+    private PackedScene twigSpotScene = null;
 
     [Export]
     private float revolutionsPerTwigSpot = .1f;
@@ -21,7 +24,6 @@ public class TwigContainer : Node2D
 
     float now = 0f;
     float spotAngleStep = 0f;
-    float spotDistanceStep = 0f;
 
     [Export]
     private float twigFollowSpeed = .5f;
@@ -70,5 +72,9 @@ public class TwigContainer : Node2D
     {
         twigSpots[nextTwigSpotIndex].Visible = false;
         twigs[nextTwigSpotIndex++] = twig;
+        if (nextTwigSpotIndex == twigs.Length)
+        {
+            EmitSignal(nameof(AllTwigsCollected));
+        }
     }
 }
