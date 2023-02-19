@@ -3,6 +3,8 @@ using System;
 
 public class Twig : Node2D
 {
+    private static readonly Vector2 HALF = Vector2.One * .5f;
+
     RayCast2D rayCast2D;
     Player player;
 
@@ -10,14 +12,27 @@ public class Twig : Node2D
 
     bool following = false;
     bool delivered = false;
+    public bool NeedsLabel => !following && !delivered;
 
     [Export]
     private float followSpeed = .5f;
 
     TwigContainer twigContainer;
 
+    TileMap map;
+
+    private int positionId = 0;
+    public int PositionId => positionId;
+
     public override void _Ready()
     {
+        var mapNodes = GetTree().GetNodesInGroup("map");
+        if (mapNodes.Count > 0)
+        {
+            map = mapNodes[0] as TileMap;
+            SnapToMap(GlobalPosition);
+        }
+
         var playerNodes = GetTree().GetNodesInGroup("player");
         if (playerNodes.Count > 0)
         {
@@ -45,6 +60,13 @@ public class Twig : Node2D
         Vector2 distance = player.GlobalPosition - GlobalPosition;
         if (following)
         {
+            if (player.Overencumbered)
+            {
+                player.ReleaseTwig();
+                SnapToMap(player.GlobalPosition);
+                following = false;
+                return;
+            }
             GlobalPosition += distance * followSpeed;
             return;
         }
@@ -65,6 +87,7 @@ public class Twig : Node2D
     public void _on_Player_DroppedAllTwigs()
     {
         following = false;
+        SnapToMap(player.GlobalPosition);
     }
 
     public void _on_Player_ReachedTwigContainer()
@@ -79,5 +102,19 @@ public class Twig : Node2D
         twigContainer.ReserveSpot(this);
         GetNode<AnimationPlayer>("AnimationPlayer").Stop();
         GetNode<Sprite>("Sprite").Frame = 0;
+    }
+
+    private void SnapToMap(Vector2 targetPosition)
+    {
+        if (map == null)
+        {
+            GD.Print("NOT Snapping to map?!");
+            return;
+        }
+        Vector2 cellSize = map.ToGlobal(map.CellSize);
+        targetPosition /= GlobalScale;
+        Vector2 cellPosition = (targetPosition / map.CellSize - HALF).Round();
+        Position = (cellPosition + HALF) * map.CellSize;
+        positionId = (((int)cellPosition.x + (1 << 14)) << 15) + (int)cellPosition.y + (1 << 14);
     }
 }

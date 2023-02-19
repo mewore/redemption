@@ -61,6 +61,7 @@ public partial class Player : KinematicBody2D
     private int maxTwigs;
     private int currentTwigs;
     public bool CanCarryMoreTwigs { get => currentTwigs < maxTwigs; }
+    public bool Overencumbered { get => currentTwigs > maxTwigs; }
 
     RayCast2D twigContainerRayCast;
     Node2D twigContainer;
@@ -93,7 +94,7 @@ public partial class Player : KinematicBody2D
         {
             return;
         }
-        SetTwigCapacity(maxTwigsWhenWalking);
+        maxTwigs = maxTwigsWhenWalking;
 
         // Handle Jump.
         if (Input.IsActionJustReleased("jump") && velocity.y < 0f)
@@ -156,7 +157,7 @@ public partial class Player : KinematicBody2D
         {
             return;
         }
-        SetTwigCapacity(maxTwigsWhenFlying);
+        maxTwigs = maxTwigsWhenFlying;
 
         Vector2 desiredVelocity = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("fly_up", "fly_down")).Normalized() * flyMaxSpeed;
         velocity = velocity.MoveToward(desiredVelocity, flyAcceleration * (float)delta);
@@ -175,16 +176,6 @@ public partial class Player : KinematicBody2D
         }
     }
 
-    private void SetTwigCapacity(int newCapcity)
-    {
-        if (newCapcity < maxTwigs)
-        {
-            EmitSignal(nameof(DroppedAllTwigs));
-            currentTwigs = 0;
-        }
-        maxTwigs = newCapcity;
-    }
-
     public bool PickTwigUp()
     {
         if (currentTwigs >= maxTwigs)
@@ -194,6 +185,8 @@ public partial class Player : KinematicBody2D
         ++currentTwigs;
         return true;
     }
+
+    public void ReleaseTwig() => --currentTwigs;
 
     public void DetectTwigContainer()
     {

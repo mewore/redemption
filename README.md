@@ -24,7 +24,7 @@
 
 ### Basic features
 
-- [ ] 💙 Twig groups - multiple twigs at the same place appear as one with a number above
+- [x] 💙 Twig groups - multiple twigs at the same place appear as one with a number above
 - [ ] 💜 Player sprite
 - [ ] 💙 Timer
 - [ ] 💙 Counters for twigs, carry limit, etc.

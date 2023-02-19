@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/fonts/title.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/MainMenu.cs" type="Script" id=3]
 
