@@ -125,7 +125,7 @@ margin_top = 24.0
 margin_right = 1007.0
 margin_bottom = 79.0
 theme = ExtResource( 7 )
-text = "0:42"
+text = "0:00"
 
 [connection signal="AllTwigsCollected" from="Game/TwigContainer" to="." method="_on_TwigContainer_AllTwigsCollected"]
 [connection signal="timeout" from="Game/HelperDeathTimer" to="." method="_on_HelperDeathTimer_timeout"]

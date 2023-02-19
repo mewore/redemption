@@ -32,7 +32,7 @@
 - [x] 💙💜 Bird companions
 - [x] 💙 The bird companions disappear after some time
 - [x] 💙 Dashing while flying
-- [ ] 💙 The timer shouldn't start until the player has started moving
+- [x] 💙 The timer shouldn't start until the player has started moving
 - [ ] 💙 Pausing the game
 - [ ] 💙 Returning to the main menu
 - [ ] 💙 Restarting the level

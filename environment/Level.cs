@@ -9,6 +9,8 @@ public class Level : Node2D
     private TileMap map;
     private Vector2[] exitCells;
 
+    private bool playerHasStartedMoving = false;
+    private Vector2 playerStartingPosition;
     private Player player;
     private Camera2D camera;
 
@@ -38,6 +40,7 @@ public class Level : Node2D
         exitTileMap.QueueFree();
 
         player = GetNode<Player>("Game/Player");
+        playerStartingPosition = player.Position;
         camera = GetNode<Camera2D>("Game/Camera2D");
 
         var twigNodes = GetTree().GetNodesInGroup("twig");
@@ -54,6 +57,14 @@ public class Level : Node2D
 
     public override void _PhysicsProcess(float delta)
     {
+        if (!playerHasStartedMoving)
+        {
+            if (player.Position.DistanceSquaredTo(playerStartingPosition) < 1f)
+            {
+                return;
+            }
+            playerHasStartedMoving = true;
+        }
         now += delta;
         int seconds = Mathf.FloorToInt(now);
         timeLabel.Text = (seconds / 60) + ":" + ((seconds % 60) / 10) + ((seconds % 60) % 10);
