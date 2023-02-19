@@ -28,7 +28,7 @@
 - [x] 💜 Player sprite (walking)
 - [ ] 💜 Player sprite (flying)
 - [x] 💙 Timer
-- [ ] 💙 Counters for twigs, carry limit, etc.
+- [x] 💙 Counters for twigs, carry limit, etc.
 - [ ] 💙💜 Bird companions
 - [ ] 💙 The bird companions disappear after some time
 - [ ] 💜 The place where the player needs to put the sticks
@@ -49,6 +49,7 @@
 - [ ] 💛 Menu SFX
 - [ ] 💙 Switching between levels
 - [ ] 💙 Show the best time per level
+- [ ] 💙 Dashing while flying
 - [ ] 💙💜 Obstacles that make the player drop all sticks
 - [ ] 💙💜 Obstacles that make bird companions disappear
 - [ ] 💛 Music

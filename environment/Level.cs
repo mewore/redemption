@@ -52,7 +52,7 @@ public class Level : Node2D
     {
         now += delta;
         int seconds = Mathf.FloorToInt(now);
-        timeLabel.Text = (seconds / 60).ToString() + ":" + ((seconds % 60) / 10).ToString() + ((seconds % 60) % 10).ToString();
+        timeLabel.Text = (seconds / 60) + ":" + ((seconds % 60) / 10) + ((seconds % 60) % 10);
         Vector2 playerPos = player.GlobalPosition;
         if (playerPos.x > camera.LimitRight || playerPos.x < camera.LimitLeft || playerPos.y > camera.LimitBottom || playerPos.y < camera.LimitTop)
         {

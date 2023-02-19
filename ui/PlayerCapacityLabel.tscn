@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/PlayerCapacityLabel.cs" type="Script" id=2]
+[ext_resource path="res://ui/fonts/twig-text.tres" type="DynamicFont" id=3]
+
+[node name="PlayerCapacityLabel" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -128.0
+margin_top = -32.0
+margin_right = 128.0
+margin_bottom = 23.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "142 / 521"
+align = 1
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, 80 )

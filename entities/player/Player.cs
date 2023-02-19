@@ -59,7 +59,9 @@ public partial class Player : KinematicBody2D
     private int maxTwigsWhenFlying = 5;
 
     private int maxTwigs;
+    public int MaxTwigs => maxTwigs;
     private int currentTwigs;
+    public int CurrentTwigs => currentTwigs;
     public bool CanCarryMoreTwigs { get => currentTwigs < maxTwigs; }
     public bool Overencumbered { get => currentTwigs > maxTwigs; }
 

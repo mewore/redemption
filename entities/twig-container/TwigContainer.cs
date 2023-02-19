@@ -22,6 +22,9 @@ public class TwigContainer : Node2D
     float[] twigSpotDistances;
     Node2D[] twigs;
 
+    public int CurrentTwigs => nextTwigSpotIndex;
+    public int MaxTwigs => twigs.Length;
+
     float now = 0f;
     float spotAngleStep = 0f;
 
