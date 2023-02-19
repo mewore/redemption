@@ -83,3 +83,6 @@ position = Vector2( 146.667, 172 )
 
 [node name="Helper5" parent="Game/Helpers" index="4" instance=ExtResource( 3 )]
 position = Vector2( 157.333, 172 )
+
+[node name="Hud" parent="." index="4"]
+layer = 3

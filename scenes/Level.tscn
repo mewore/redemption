@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://environment/tilesheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/theme.tres" type="Theme" id=7]
 [ext_resource path="res://ui/PlayerCapacityLabel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/TwigContainerLabel.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
@@ -53,10 +54,12 @@ points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
 0/z_index = 0
 
 [node name="Level" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 5 )
 twigCountLabelScene = ExtResource( 6 )
 
 [node name="Game" type="Node2D" parent="."]
+pause_mode = 1
 scale = Vector2( 6, 6 )
 
 [node name="TileMap" type="TileMap" parent="Game" groups=["map"]]
@@ -126,6 +129,9 @@ margin_right = 1007.0
 margin_bottom = 79.0
 theme = ExtResource( 7 )
 text = "0:00"
+
+[node name="PauseMenu" parent="." instance=ExtResource( 10 )]
+visible = false
 
 [connection signal="AllTwigsCollected" from="Game/TwigContainer" to="." method="_on_TwigContainer_AllTwigsCollected"]
 [connection signal="timeout" from="Game/HelperDeathTimer" to="." method="_on_HelperDeathTimer_timeout"]

@@ -26,6 +26,9 @@ public class Level : Node2D
 
     private Godot.Collections.Array helpers;
 
+    private Node gameNode;
+    private PauseMenu pauseMenu;
+
     public override void _Ready()
     {
         map = GetNode<TileMap>("Game/TileMap");
@@ -53,10 +56,17 @@ public class Level : Node2D
         timeLabel = GetNode<Label>("Hud/TimeContainer/TimeLabel");
 
         helpers = GetNode("Game/Helpers").GetChildren();
+
+        gameNode = GetNode("Game");
+        pauseMenu = GetNode<PauseMenu>("PauseMenu");
     }
 
     public override void _PhysicsProcess(float delta)
     {
+        if (pauseMenu.Visible)
+        {
+            return;
+        }
         if (!playerHasStartedMoving)
         {
             if (player.Position.DistanceSquaredTo(playerStartingPosition) < 1f)

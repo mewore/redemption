@@ -33,9 +33,9 @@
 - [x] 💙 The bird companions disappear after some time
 - [x] 💙 Dashing while flying
 - [x] 💙 The timer shouldn't start until the player has started moving
-- [ ] 💙 Pausing the game
-- [ ] 💙 Returning to the main menu
-- [ ] 💙 Restarting the level
+- [x] 💙 Pausing the game
+- [x] 💙 Returning to the main menu
+- [x] 💙 Restarting the level
 - [ ] 💜 The place where the player needs to put the sticks
 - [ ] 💚 5 levels
 - [ ] 💛 Bird companion SFX
