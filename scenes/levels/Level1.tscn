@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/twig/Twig.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/helper/Helper.tscn" type="PackedScene" id=3]
 
 [node name="Level" instance=ExtResource( 1 )]
 
@@ -25,3 +26,78 @@ position = Vector2( 166, 149 )
 
 [node name="Twig5" parent="Game/Twigs" index="4" instance=ExtResource( 2 )]
 position = Vector2( 180, 149 )
+
+[node name="Twig6" parent="Game/Twigs" index="5" instance=ExtResource( 2 )]
+position = Vector2( 138, 34 )
+
+[node name="Twig7" parent="Game/Twigs" index="6" instance=ExtResource( 2 )]
+position = Vector2( 146, 34 )
+
+[node name="Twig8" parent="Game/Twigs" index="7" instance=ExtResource( 2 )]
+position = Vector2( 130, 34 )
+
+[node name="Twig9" parent="Game/Twigs" index="8" instance=ExtResource( 2 )]
+position = Vector2( 132, 27 )
+
+[node name="Twig10" parent="Game/Twigs" index="9" instance=ExtResource( 2 )]
+position = Vector2( 146, 27 )
+
+[node name="Twig11" parent="Game/Twigs" index="10" instance=ExtResource( 2 )]
+position = Vector2( 172, 33 )
+
+[node name="Twig12" parent="Game/Twigs" index="11" instance=ExtResource( 2 )]
+position = Vector2( 180, 33 )
+
+[node name="Twig13" parent="Game/Twigs" index="12" instance=ExtResource( 2 )]
+position = Vector2( 164, 33 )
+
+[node name="Twig14" parent="Game/Twigs" index="13" instance=ExtResource( 2 )]
+position = Vector2( 166, 26 )
+
+[node name="Twig15" parent="Game/Twigs" index="14" instance=ExtResource( 2 )]
+position = Vector2( 180, 26 )
+
+[node name="Twig16" parent="Game/Twigs" index="15" instance=ExtResource( 2 )]
+position = Vector2( 156, 50 )
+
+[node name="Twig17" parent="Game/Twigs" index="16" instance=ExtResource( 2 )]
+position = Vector2( 164, 50 )
+
+[node name="Twig18" parent="Game/Twigs" index="17" instance=ExtResource( 2 )]
+position = Vector2( 148, 50 )
+
+[node name="Twig19" parent="Game/Twigs" index="18" instance=ExtResource( 2 )]
+position = Vector2( 150, 43 )
+
+[node name="Twig20" parent="Game/Twigs" index="19" instance=ExtResource( 2 )]
+position = Vector2( 164, 43 )
+
+[node name="Helper" parent="Game/Helpers" index="0" instance=ExtResource( 3 )]
+position = Vector2( 50, 172 )
+
+[node name="Helper2" parent="Game/Helpers" index="1" instance=ExtResource( 3 )]
+position = Vector2( 41, 172 )
+
+[node name="Helper3" parent="Game/Helpers" index="2" instance=ExtResource( 3 )]
+position = Vector2( 31, 172 )
+
+[node name="Helper4" parent="Game/Helpers" index="3" instance=ExtResource( 3 )]
+position = Vector2( 22, 172 )
+
+[node name="Helper5" parent="Game/Helpers" index="4" instance=ExtResource( 3 )]
+position = Vector2( 13, 172 )
+
+[node name="Helper6" parent="Game/Helpers" index="5" instance=ExtResource( 3 )]
+position = Vector2( 17, 164 )
+
+[node name="Helper7" parent="Game/Helpers" index="6" instance=ExtResource( 3 )]
+position = Vector2( 27, 163 )
+
+[node name="Helper8" parent="Game/Helpers" index="7" instance=ExtResource( 3 )]
+position = Vector2( 36, 164 )
+
+[node name="Helper9" parent="Game/Helpers" index="8" instance=ExtResource( 3 )]
+position = Vector2( 46, 164 )
+
+[node name="Helper10" parent="Game/Helpers" index="9" instance=ExtResource( 3 )]
+position = Vector2( 32, 156 )

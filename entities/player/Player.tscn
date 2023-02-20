@@ -1,19 +1,64 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entities/player/player.png" type="Texture" id=1]
 [ext_resource path="res://entities/StateMachine.cs" type="Script" id=2]
 [ext_resource path="res://entities/player/states/PlayerActive.cs" type="Script" id=3]
 [ext_resource path="res://entities/player/Player.cs" type="Script" id=4]
 [ext_resource path="res://entities/player/states/PlayerFlying.cs" type="Script" id=5]
+[ext_resource path="res://entities/player/player-flying.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=5]
+resource_name = "bounce"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.153893, 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 1.25 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.717647, 0.631373, 0.886275, 1 ) ]
+}
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 7.0
+radius = 5.0
 height = 6.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "flying"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/FlyingSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "standing"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -30,7 +75,7 @@ resource_name = "walking"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -46,15 +91,33 @@ tracks/0/keys = {
 collision_layer = 2
 script = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="SpriteContainer" type="Node2D" parent="."]
+modulate = Color( 0.717647, 0.631373, 0.886275, 1 )
 self_modulate = Color( 0.717647, 0.631373, 0.886275, 1 )
+
+[node name="Sprite" type="Sprite" parent="SpriteContainer"]
 position = Vector2( 0, -4 )
 texture = ExtResource( 1 )
 hframes = 5
 
+[node name="FlyingSprite" type="Sprite" parent="SpriteContainer"]
+visible = false
+position = Vector2( 0, -2 )
+texture = ExtResource( 6 )
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteContainer"]
+root_node = NodePath("../..")
+anims/bounce = SubResource( 5 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
+
+[node name="CollisionShapeFlying" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource( 1 )
+disabled = true
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -79,6 +142,7 @@ position = Vector2( 0, -40 )
 cast_to = Vector2( 48, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/flying = SubResource( 4 )
 anims/standing = SubResource( 2 )
 anims/walking = SubResource( 3 )
 

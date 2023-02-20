@@ -26,7 +26,7 @@
 
 - [x] 💙 Twig groups - multiple twigs at the same place appear as one with a number above
 - [x] 💜 Player sprite (walking)
-- [ ] 💜 Player sprite (flying)
+- [x] 💜 Player sprite (flying)
 - [x] 💙 Timer
 - [x] 💙 Counters for twigs, carry limit, etc.
 - [x] 💙💜 Bird companions

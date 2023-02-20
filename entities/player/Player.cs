@@ -49,7 +49,10 @@ public partial class Player : KinematicBody2D
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     public float gravity = (int)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
+    private Node2D spriteContainer;
+    private AnimationPlayer spriteContainerAnimPlayer;
     private Sprite sprite;
+    private Sprite flyingSprite;
 
     private Vector2 velocity;
     public bool CanMove = true;
@@ -75,9 +78,15 @@ public partial class Player : KinematicBody2D
 
     private int helpers = 0;
 
+    private CollisionShape2D collisionShape;
+    private CollisionShape2D collisionShapeFlying;
+
     public override void _Ready()
     {
-        sprite = GetNode<Sprite>("Sprite");
+        spriteContainer = GetNode<Node2D>("SpriteContainer");
+        spriteContainerAnimPlayer = spriteContainer.GetNode<AnimationPlayer>("AnimationPlayer");
+        sprite = spriteContainer.GetNode<Sprite>("Sprite");
+        flyingSprite = spriteContainer.GetNode<Sprite>("FlyingSprite");
         jumpSpeed = Mathf.Sqrt(gravity * -GetNode<Node2D>("JumpHeight").Position.y * GlobalScale.y);
         maxTwigs = maxTwigsWhenWalking;
 
@@ -170,6 +179,10 @@ public partial class Player : KinematicBody2D
         velocity.y = -jumpSpeed;
         EmitSignal(nameof(FlyRequested));
         lastWantedToJumpAt = -jumpGraceTime;
+        spriteContainerAnimPlayer.Play("bounce");
+        sprite.Visible = false;
+        flyingSprite.Visible = true;
+        flyingSprite.Scale = sprite.Scale;
     }
 
     public void Fly(float delta)
@@ -178,15 +191,19 @@ public partial class Player : KinematicBody2D
         {
             return;
         }
+        if (animationPlayer.CurrentAnimation != "flying")
+        {
+            animationPlayer.Play("flying");
+        }
         maxTwigs = maxTwigsWhenFlying + helpers;
 
         Vector2 desiredVelocity = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("fly_up", "fly_down")).Normalized() * flyMaxSpeed;
         velocity = velocity.MoveToward(desiredVelocity, flyAcceleration * (float)delta);
 
         int lookSign = Mathf.Sign(desiredVelocity.x);
-        if (lookSign != 0 && lookSign != Mathf.Sign(sprite.Scale.x))
+        if (lookSign != 0 && lookSign != Mathf.Sign(flyingSprite.Scale.x))
         {
-            sprite.Scale = new Vector2(-sprite.Scale.x, sprite.Scale.y);
+            flyingSprite.Scale = new Vector2(-flyingSprite.Scale.x, flyingSprite.Scale.y);
         }
 
         velocity = MoveAndSlide(velocity, Vector2.Up);
@@ -194,6 +211,10 @@ public partial class Player : KinematicBody2D
         if (IsOnFloor() && Input.IsActionPressed("fly_down"))
         {
             EmitSignal(nameof(LandRequested));
+            spriteContainerAnimPlayer.Play("bounce");
+            sprite.Visible = true;
+            flyingSprite.Visible = false;
+            sprite.Scale = flyingSprite.Scale;
         }
     }
 
