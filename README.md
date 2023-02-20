@@ -49,7 +49,7 @@
 
 - [ ] 💙 A spinning heartbeat line around the twig container, which shoots out towards the exit when done (and its path
   is defined by a Line2D)
-- [ ] 💜 Environment
+- [x] 💜 Environment
 - [ ] 💜 Better-looking HUD
 - [ ] 💜 A better-looking indicator of the bird disappearance counter?
 - [ ] 💛 Menu SFX
